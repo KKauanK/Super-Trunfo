@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <string.h>
+
+// Estrutura para representar uma carta
+struct carta {
+    char nome[30];
+    char codigo;
+    int populacao;
+};
+
+// Função para comparar duas cartas
+void batalhar(struct carta c1, struct carta c2) {
+    printf("\nBatalha entre %s e %s!\n", c1.nome, c2.nome);
+    if (c1.populacao > c2.populacao) {
+        printf("🏆 %s venceu com população de %d milhões!\n", c1.nome, c1.populacao);
+    } else if (c1.populacao < c2.populacao) {
+        printf("🏆 %s venceu com população de %d milhões!\n", c2.nome, c2.populacao);
+    } else {
+        printf("🤝 Empate! Ambos têm %d milhões de habitantes.\n", c1.populacao);
+    }
+}
+
+int main() {
+    // Definindo as cartas
+    struct carta cartas[4] = {
+        {"São Paulo", 'A', 44},
+        {"Rio de Janeiro", 'B', 17},
+        {"Distrito Federal", 'C', 3},
+        {"Minas Gerais", 'D', 20}
+    };
+
+    char escolha1, escolha2;
+
+    printf("Escolha duas cartas para batalhar (A, B, C, D):\n");
+    printf("A - São Paulo\nB - Rio de Janeiro\nC - Distrito Federal\nD - Minas Gerais\n");
+
+    printf("Digite a primeira carta: ");
+    scanf(" %c", &escolha1);
+
+    printf("Digite a segunda carta: ");
+    scanf(" %c", &escolha2);
+
+    struct carta carta1, carta2;
+    int i, encontrados = 0;
+
+    for (i = 0; i < 4; i++) {
+        if (cartas[i].codigo == escolha1) {
+            carta1 = cartas[i];
+            encontrados++;
+        }
+        if (cartas[i].codigo == escolha2) {
+            carta2 = cartas[i];
+            encontrados++;
+        }
+    }
+
+    if (encontrados == 2) {
+        batalhar(carta1, carta2);
+    } else {
+        printf("❌ Cartas inválidas. Tente novamente com letras A, B, C ou D.\n");
+    }
+
+    return 0;
+}
